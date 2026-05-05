@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lin Jiaqi | 3D Motion Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            /* 3D 空间网格背景 */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        @keyframes rollIn {
+            0% { opacity: 0; transform: translateX(100px) rotate(30deg); filter: blur(10px); }
+            100% { opacity: 1; transform: translateX(0) rotate(0deg); filter: blur(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .animate-roll { animation: rollIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        .animate-content { animation: fadeIn 1s ease-out 0.8s both; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 针对青紫色调图片微调的光晕 */
+        .avatar-container {
+            position: relative;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: 0;
+            /* 使用图片边缘的青紫色作为光晕色 */
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
+            filter: blur(25px);
+            z-index: -1;
+        }
+
+        .behance-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            line-height: 0;
+        }
+
+        .behance-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(167, 139, 250, 0.5); /* 悬停时光晕颜色同步 */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
+
+    <div class="max-w-5xl w-full text-center">
+        
+        <!-- Header -->
+        <div class="animate-roll mb-16 inline-flex flex-col items-center">
+            
+            <div class="avatar-container mb-8">
+                <div class="avatar-glow"></div>
+                <!-- 关键点：请将图片重命名为 avatar.png 并放在代码文件旁 -->
+                <img src="avatar.png" 
+                     alt="Lin Jiaqi" 
+                     class="w-[140px] h-[140px] object-contain drop-shadow-[0_0_15px_rgba(167,139,250,0.2)]">
+            </div>
+            
+            <div class="flex flex-col items-center gap-2">
+                <h2 class="text-white text-lg tracking-[0.3em] font-semibold uppercase">Hi, I'm Lin Jiaqi</h2>
+                <h1 class="text-zinc-500 text-sm tracking-[0.25em] font-normal uppercase italic">3D Motion Design</h1>
+                
+                <div class="w-8 h-[1px] bg-zinc-800 my-2"></div>
+                
+                <p class="text-zinc-400 text-[10px] tracking-[0.3em] uppercase font-normal">Here is my portfolio</p>
+            </div>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="animate-content flex flex-col md:flex-row gap-10 justify-center items-center">
+            <div class="behance-card">
+                <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0"></iframe>
+            </div>
+
+            <div class="behance-card">
+                <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="animate-content mt-20">
+            <p class="text-zinc-700 text-[9px] tracking-[0.6em] uppercase font-light">
+                Thanks for watching
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
