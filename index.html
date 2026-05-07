@@ -33,7 +33,6 @@
         .animate-content { animation: fadeIn 1s ease-out 0.8s both; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 针对青紫色调图片微调的光晕 */
         .avatar-container {
             position: relative;
             animation: float 5s ease-in-out infinite;
@@ -42,12 +41,12 @@
         .avatar-glow {
             position: absolute;
             inset: 0;
-            /* 使用图片边缘的青紫色作为光晕色 */
             background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
             filter: blur(25px);
             z-index: -1;
         }
 
+        /* 响应式卡片样式修改 */
         .behance-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
@@ -56,12 +55,23 @@
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             line-height: 0;
+            /* 核心：宽度自适应，但最大不超过 404px */
+            width: 100%;
+            max-width: 404px;
         }
 
         .behance-card:hover {
             transform: translateY(-12px) scale(1.02);
-            border-color: rgba(167, 139, 250, 0.5); /* 悬停时光晕颜色同步 */
+            border-color: rgba(167, 139, 250, 0.5);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        /* 移动端专属微调 */
+        @media (max-width: 640px) {
+            body { padding: 1.5rem; }
+            .avatar-container img { width: 110px; height: 110px; }
+            h2 { font-size: 1rem; }
+            .animate-content { gap: 1.5rem; }
         }
     </style>
 </head>
@@ -69,14 +79,12 @@
 
     <div class="max-w-5xl w-full text-center">
         
-        <!-- Header -->
         <div class="animate-roll mb-16 inline-flex flex-col items-center">
             
             <div class="avatar-container mb-8">
                 <div class="avatar-glow"></div>
-                <!-- 关键点：请将图片重命名为 avatar.png 并放在代码文件旁 -->
                 <img src="avatar.png" 
-                     alt="Lin Jiaqi" 
+                     alt="Yuzi" 
                      class="w-[140px] h-[140px] object-contain drop-shadow-[0_0_15px_rgba(167,139,250,0.2)]">
             </div>
             
@@ -90,18 +98,16 @@
             </div>
         </div>
 
-        <!-- Portfolio -->
         <div class="animate-content flex flex-col md:flex-row gap-10 justify-center items-center">
             <div class="behance-card">
-                <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0"></iframe>
+                <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0" allow="clipboard-write"></iframe>
             </div>
 
             <div class="behance-card">
-                <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="316" width="404" allowfullscreen lazyload frameborder="0"></iframe>
+                <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0" allow="clipboard-write"></iframe>
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="animate-content mt-20">
             <p class="text-zinc-700 text-[9px] tracking-[0.6em] uppercase font-light">
                 Thanks for watching
