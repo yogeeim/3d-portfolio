@@ -33,20 +33,17 @@
         .animate-content { animation: fadeIn 1s ease-out 0.8s both; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ----------------------------------------------------------- */
-        /* 核心修改点：稍微加强了紫色光晕的强度与范围 */
-        /* ----------------------------------------------------------- */
         .avatar-container {
             position: relative;
             animation: float 5s ease-in-out infinite;
         }
 
+        /* 稍微加强了紫色光晕的强度与范围 */
         .avatar-glow {
             position: absolute;
-            inset: -5px; /* 轻微向外扩散 */
-            /* 核心：将透明度从 0.15 稍微提高到 0.22，增强强度 */
+            inset: -5px;
             background: radial-gradient(circle, rgba(167, 139, 250, 0.22) 0%, transparent 73%);
-            filter: blur(28px); /* 稍微放大模糊范围 */
+            filter: blur(28px);
             z-index: -1;
         }
 
@@ -58,56 +55,46 @@
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             line-height: 0;
-            /* 关键：允许卡片在手机端收缩 */
             width: 100%;
             max-width: 404px;
         }
 
         .behance-card:hover {
             transform: translateY(-12px) scale(1.02);
-            border-color: rgba(167, 139, 250, 0.5); /* 悬停时光晕颜色同步 */
+            border-color: rgba(167, 139, 250, 0.5);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
         /* ----------------------------------------------------------- */
         /* 仅针对手机端的专属优化区域 (屏幕宽度 < 640px) */
-        /* 保持网页版视图不变，仅调整手机端比例与留白 */
         /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
             body { 
-                padding: 4rem 1.5rem; /* 增加手机端垂直留白，增加呼吸感 */
+                /* 核心修改：大幅增加顶部边距，让内容在手机屏幕上居中偏下起始 */
+                padding: 12rem 1.5rem 5rem 1.5rem !important; 
             }
             
-            /* 1. 缩小头像比例 */
             .avatar-container img { 
-                width: 100px !important;  /* 从 140px 缩小到 100px */
+                width: 100px !important;  
                 height: 100px !important; 
             }
             
-            /* 2. 在不改变文字内容和 Tailwind 类名的前提下，缩小文字展示大小 */
-            h2 { 
-                font-size: 1rem !important; /* Hi, I'm Yuzi */
-            }
-            h1 { 
-                font-size: 0.8rem !important; /* 3D Motion Design */
-            }
-            p {
-                font-size: 8px !important; /* Here is my portfolio & Footer */
-            }
+            h2 { font-size: 1rem !important; }
+            h1 { font-size: 0.8rem !important; }
+            p { font-size: 8px !important; }
             
-            /* 3. 增加间距以提供呼吸感 */
             .animate-roll {
-                margin-bottom: 4rem !important; /* 名字与作品之间的距离 */
+                margin-bottom: 5rem !important; 
             }
             
             .behance-card { 
-                width: 88%; /* 减小卡片占比，露出更多背景网格 */
+                width: 88%; 
                 margin: 0 auto;
-                transform: scale(0.95); /* 轻微缩小，增加精致感 */
+                transform: scale(0.95);
             }
             
             .animate-content { 
-                gap: 5rem; /* 作品卡片之间的垂直距离拉得更开 */
+                gap: 5rem; 
                 margin-top: 1.5rem;
             }
         }
