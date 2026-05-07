@@ -33,6 +33,9 @@
         .animate-content { animation: fadeIn 1s ease-out 0.8s both; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* ----------------------------------------------------------- */
+        /* 核心修改点：稍微加强了紫色光晕的强度与范围 */
+        /* ----------------------------------------------------------- */
         .avatar-container {
             position: relative;
             animation: float 5s ease-in-out infinite;
@@ -40,13 +43,13 @@
 
         .avatar-glow {
             position: absolute;
-            inset: 0;
-            background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
-            filter: blur(25px);
+            inset: -5px; /* 轻微向外扩散 */
+            /* 核心：将透明度从 0.15 稍微提高到 0.22，增强强度 */
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.22) 0%, transparent 73%);
+            filter: blur(28px); /* 稍微放大模糊范围 */
             z-index: -1;
         }
 
-        /* 响应式卡片样式修改 */
         .behance-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
@@ -55,23 +58,58 @@
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             line-height: 0;
-            /* 核心：宽度自适应，但最大不超过 404px */
+            /* 关键：允许卡片在手机端收缩 */
             width: 100%;
             max-width: 404px;
         }
 
         .behance-card:hover {
             transform: translateY(-12px) scale(1.02);
-            border-color: rgba(167, 139, 250, 0.5);
+            border-color: rgba(167, 139, 250, 0.5); /* 悬停时光晕颜色同步 */
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        /* 移动端专属微调 */
+        /* ----------------------------------------------------------- */
+        /* 仅针对手机端的专属优化区域 (屏幕宽度 < 640px) */
+        /* 保持网页版视图不变，仅调整手机端比例与留白 */
+        /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
-            body { padding: 1.5rem; }
-            .avatar-container img { width: 110px; height: 110px; }
-            h2 { font-size: 1rem; }
-            .animate-content { gap: 1.5rem; }
+            body { 
+                padding: 4rem 1.5rem; /* 增加手机端垂直留白，增加呼吸感 */
+            }
+            
+            /* 1. 缩小头像比例 */
+            .avatar-container img { 
+                width: 100px !important;  /* 从 140px 缩小到 100px */
+                height: 100px !important; 
+            }
+            
+            /* 2. 在不改变文字内容和 Tailwind 类名的前提下，缩小文字展示大小 */
+            h2 { 
+                font-size: 1rem !important; /* Hi, I'm Yuzi */
+            }
+            h1 { 
+                font-size: 0.8rem !important; /* 3D Motion Design */
+            }
+            p {
+                font-size: 8px !important; /* Here is my portfolio & Footer */
+            }
+            
+            /* 3. 增加间距以提供呼吸感 */
+            .animate-roll {
+                margin-bottom: 4rem !important; /* 名字与作品之间的距离 */
+            }
+            
+            .behance-card { 
+                width: 88%; /* 减小卡片占比，露出更多背景网格 */
+                margin: 0 auto;
+                transform: scale(0.95); /* 轻微缩小，增加精致感 */
+            }
+            
+            .animate-content { 
+                gap: 5rem; /* 作品卡片之间的垂直距离拉得更开 */
+                margin-top: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -100,11 +138,11 @@
 
         <div class="animate-content flex flex-col md:flex-row gap-10 justify-center items-center">
             <div class="behance-card">
-                <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0" allow="clipboard-write"></iframe>
+                <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
             </div>
 
             <div class="behance-card">
-                <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0" allow="clipboard-write"></iframe>
+                <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
             </div>
         </div>
 
