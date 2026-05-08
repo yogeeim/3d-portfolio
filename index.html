@@ -38,7 +38,7 @@
             animation: float 5s ease-in-out infinite;
         }
 
-        /* 稍微加强了紫色光晕的强度与范围 */
+        /* 严格锁定：紫色光晕强度 0.22 和 73% 扩散范围 */
         .avatar-glow {
             position: absolute;
             inset: -5px;
@@ -66,36 +66,40 @@
         }
 
         /* ----------------------------------------------------------- */
-        /* 仅针对手机端的专属优化区域 (屏幕宽度 < 640px) */
+        /* 仅针对手机端的精准优化区域 (模仿参考图一布局) */
         /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
             body { 
-                /* 核心修改：大幅增加顶部边距，让内容在手机屏幕上居中偏下起始 */
-                padding: 12rem 1.5rem 5rem 1.5rem !important; 
+                /* 调整顶部边距，让 header 从舒适高度开始 */
+                padding: 8rem 1.5rem 5rem 1.5rem !important; 
             }
             
+            /* 1. 缩小头像尺寸，模拟图一比例 */
             .avatar-container img { 
-                width: 100px !important;  
-                height: 100px !important; 
+                width: 80px !important;  
+                height: 80px !important; 
             }
             
-            h2 { font-size: 1rem !important; }
-            h1 { font-size: 0.8rem !important; }
-            p { font-size: 8px !important; }
+            /* 2. 紧凑文字展示 */
+            h2 { font-size: 0.9rem !important; margin-bottom: 0 !important; }
+            h1 { font-size: 0.75rem !important; margin-bottom: 0.2rem !important; }
+            p { font-size: 7px !important; }
             
+            /* 3. 核心修改：缩短简介与作品之间的间距，实现图一那种紧贴感 */
             .animate-roll {
-                margin-bottom: 5rem !important; 
+                margin-bottom: 1.5rem !important; 
             }
             
+            /* 4. 作品卡片比例微调 */
             .behance-card { 
-                width: 88%; 
+                width: 85%; 
                 margin: 0 auto;
-                transform: scale(0.95);
+                transform: scale(0.92);
             }
             
             .animate-content { 
-                gap: 5rem; 
-                margin-top: 1.5rem;
+                gap: 3.5rem; 
+                margin-top: 1rem;
             }
         }
     </style>
