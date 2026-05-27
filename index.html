@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0a0a;
-            /* 3D 空间网格背景 */
+            /* 3D 공간 그리드 배경 */
             background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -38,7 +38,7 @@
             animation: float 5s ease-in-out infinite;
         }
 
-        /* 严格锁定：紫色光晕强度 0.22 和 73% 扩散范围 */
+        /* 고정값: 보라색 글로우 강도 0.22 및 확산 범위 73% */
         .avatar-glow {
             position: absolute;
             inset: -5px;
@@ -47,6 +47,7 @@
             z-index: -1;
         }
 
+        /* 비핸스 카드 스타일 - 웹 버전 크기 약간 확대 */
         .behance-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
@@ -56,7 +57,7 @@
             transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             line-height: 0;
             width: 100%;
-            max-width: 404px;
+            max-width: 360px; /* 카드를 더 시원하게 보이도록 크기 확대 */
         }
 
         .behance-card:hover {
@@ -66,39 +67,40 @@
         }
 
         /* ----------------------------------------------------------- */
-        /* 仅针对手机端的精准优化区域 (模仿参考图一布局) */
+        /* 모바일 화면 전용 정밀 최적화 영역 (SAinT0117 레이아웃 반영) */
         /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
             body { 
-                /* 调整顶部边距，让 header 从舒适高度开始 */
+                /* 상단 여백을 조정하여 헤더가 편안한 높이에 위치하도록 설정 */
                 padding: 8rem 1.5rem 5rem 1.5rem !important; 
             }
             
-            /* 1. 缩小头像尺寸，模拟图一比例 */
+            /* 1. 아바타 크기 축소 (모바일 비례 최적화) */
             .avatar-container img { 
                 width: 80px !important;  
                 height: 80px !important; 
             }
             
-            /* 2. 紧凑文字展示 */
+            /* 2. 텍스트 간격 압축 */
             h2 { font-size: 0.9rem !important; margin-bottom: 0 !important; }
             h1 { font-size: 0.75rem !important; margin-bottom: 0.2rem !important; }
             p { font-size: 7px !important; }
             
-            /* 3. 核心修改：缩短简介与作品之间的间距，实现图一那种紧贴感 */
+            /* 3. 핵심 수정: 소개 텍스트와 작품 카드 사이의 간격을 좁혀 밀착감 구현 */
             .animate-roll {
                 margin-bottom: 1.5rem !important; 
             }
             
-            /* 4. 作品卡片比例微调 */
+            /* 4. 작품 카드 비율 미세 조정 */
             .behance-card { 
                 width: 85%; 
                 margin: 0 auto;
                 transform: scale(0.92);
+                max-width: 404px; /* 모바일 가로폭 복원 */
             }
             
             .animate-content { 
-                gap: 3.5rem; 
+                gap: 3.5rem !important; 
                 margin-top: 1rem;
             }
         }
@@ -106,8 +108,10 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
 
-    <div class="max-w-5xl w-full text-center">
+    <!-- max-w-5xl에서 max-w-6xl로 넓혀 가로 3열이 넉넉하게 들어가도록 설정 -->
+    <div class="max-w-6xl w-full text-center">
         
+        <!-- 프로필 헤더 섹션 -->
         <div class="animate-roll mb-16 inline-flex flex-col items-center">
             
             <div class="avatar-container mb-8">
@@ -127,16 +131,36 @@
             </div>
         </div>
 
-        <div class="animate-content flex flex-col md:flex-row gap-10 justify-center items-center">
-            <div class="behance-card">
-                <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
+        <!-- 포트폴리오 그리드 섹션 (가로 3열 레이아웃 및 카드 확대 반영) -->
+        <div class="animate-content grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 justify-items-center items-end w-full mx-auto">
+            
+            <!-- 신규 프로젝트 1 (AI) -->
+            <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
+                <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2 text-indigo-400/80">AI</span>
+                <div class="behance-card">
+                    <iframe src="https://www.behance.net/embed/project/249936805?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0" allow="clipboard-write"></iframe>
+                </div>
             </div>
 
-            <div class="behance-card">
-                <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="316" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
+            <!-- 프로젝트 2 (3D + AI) -->
+            <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
+                <span class="text-zinc-600 text-[9px] tracking-[0.4em] uppercase font-normal block w-full text-center md:text-left pl-2">3D + AI</span>
+                <div class="behance-card">
+                    <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
+                </div>
             </div>
+
+            <!-- 프로젝트 3 (3D + AI) -->
+            <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
+                <span class="text-zinc-600 text-[9px] tracking-[0.4em] uppercase font-normal block w-full text-center md:text-left pl-2">3D + AI</span>
+                <div class="behance-card">
+                    <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
+                </div>
+            </div>
+
         </div>
 
+        <!-- 푸터 섹션 -->
         <div class="animate-content mt-20">
             <p class="text-zinc-700 text-[9px] tracking-[0.6em] uppercase font-light">
                 Thanks for watching
