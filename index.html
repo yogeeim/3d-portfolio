@@ -6,16 +6,27 @@
     <title>Welcome to my 3D & AI Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* 引入 Inter 폰트의 Light(300) 자중을 명시적으로 포함 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+        /* 부드러운 우주 호흡 애니메이션 결합 */
+        @keyframes nebulaMove {
+            0%, 100% { background-position: 0% 50%, 100% 50%; }
+            50% { background-position: 3% 47%, 97% 53%; }
+        }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
-            /* 3D 공간 그리드 배경 */
-            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: #ffffff;
+            background-color: #060608; 
+            /* 제공해주신 원본 코드의 컬러 농도와 투명도를 100% 그대로 유지하고 정적인 초저속 무브먼트만 바인딩 */
+            background-image: 
+                url("https://www.transparenttextures.com/patterns/stardust.png"), 
+                radial-gradient(circle at 15% 15%, rgba(152, 181, 66, 0.45) 0%, transparent 45%), 
+                radial-gradient(circle at 85% 50%, rgba(66, 40, 92, 0.5) 0%, transparent 50%); 
+            background-size: auto, 120% 120%, 120% 120%; 
+            animation: nebulaMove 45s ease-in-out infinite; 
+            background-attachment: fixed;
+            color: #ffffff; 
             overflow-x: hidden;
         }
 
@@ -47,23 +58,33 @@
             z-index: -1;
         }
 
-        /* 비핸스 카드 스타일 - 웹 버전 크기 약간 확대 */
+        /* 비핸스 카드 기본 스타일 */
         .behance-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02); 
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); 
             line-height: 0;
             width: 100%;
-            max-width: 360px; /* 카드를 더 시원하게 보이도록 크기 확대 */
+            max-width: 360px;
         }
 
-        .behance-card:hover {
+        /* [기본 마우스 호버] 카드 2, 3번에 적용되는 은은한 보라색 광원 연출 */
+        .behance-card.hover-purple:hover {
             transform: translateY(-12px) scale(1.02);
-            border-color: rgba(167, 139, 250, 0.5);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            background: rgba(167, 139, 250, 0.08); 
+            border-color: rgba(167, 139, 250, 0.5); 
+            box-shadow: 0 25px 50px rgba(167, 139, 250, 0.15), 0 10px 30px rgba(0, 0, 0, 0.5); 
+        }
+
+        /* [독자적 그린 호버 패치] 좌측 라임그린 성운 영역에 위치한 1번 카드 전용 그린 네온 발광 연출 */
+        .behance-card.hover-green:hover {
+            transform: translateY(-12px) scale(1.02);
+            background: rgba(152, 181, 66, 0.08); 
+            border-color: rgba(152, 181, 66, 0.45); 
+            box-shadow: 0 25px 50px rgba(152, 181, 66, 0.12), 0 10px 30px rgba(0, 0, 0, 0.5); 
         }
 
         /* ----------------------------------------------------------- */
@@ -71,36 +92,31 @@
         /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
             body { 
-                /* 상단 여백을 조정하여 헤더가 편안한 높이에 위치하도록 설정 */
-                padding: 8rem 1.5rem 5rem 1.5rem !important; 
+                padding: 8rem 1.5rem 5rem 1.5rem !important;
             }
             
-            /* 1. 아바타 크기 축소 (모바일 비례 최적화) */
             .avatar-container img { 
-                width: 80px !important;  
-                height: 80px !important; 
+                width: 80px !important; 
+                height: 80px !important;
             }
             
-            /* 2. 텍스트 간격 압축 */
             h2 { font-size: 0.9rem !important; margin-bottom: 0 !important; }
             h1 { font-size: 0.75rem !important; margin-bottom: 0.2rem !important; }
             p { font-size: 7px !important; }
             
-            /* 3. 핵심 수정: 소개 텍스트와 작품 카드 사이의 간격을 좁혀 밀착감 구현 */
             .animate-roll {
-                margin-bottom: 1.5rem !important; 
+                margin-bottom: 1.5rem !important;
             }
             
-            /* 4. 작품 카드 비율 미세 조정 */
             .behance-card { 
-                width: 85%; 
+                width: 85%;
                 margin: 0 auto;
                 transform: scale(0.92);
-                max-width: 404px; /* 모바일 가로폭 복원 */
+                max-width: 404px;
             }
             
             .animate-content { 
-                gap: 3.5rem !important; 
+                gap: 3.5rem !important;
                 margin-top: 1rem;
             }
         }
@@ -108,10 +124,8 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
 
-    <!-- max-w-5xl에서 max-w-6xl로 넓혀 가로 3열이 넉넉하게 들어가도록 설정 -->
     <div class="max-w-6xl w-full text-center">
         
-        <!-- 프로필 헤더 섹션 -->
         <div class="animate-roll mb-16 inline-flex flex-col items-center">
             
             <div class="avatar-container mb-8">
@@ -123,7 +137,7 @@
             
             <div class="flex flex-col items-center gap-2">
                 <h2 class="text-white text-lg tracking-[0.3em] font-semibold uppercase">Hi, I'm Yuzi</h2>
-                <h1 class="text-zinc-500 text-sm tracking-[0.25em] font-normal uppercase italic">3D Motion / AI Design</h1>
+                <h1 class="text-zinc-500 text-sm tracking-[0.25em] font-light uppercase italic">3D Motion / AI Design</h1>
                 
                 <div class="w-8 h-[1px] bg-zinc-800 my-2"></div>
                 
@@ -131,38 +145,33 @@
             </div>
         </div>
 
-        <!-- 포트폴리오 그리드 섹션 (가로 3열 레이아웃 및 카드 확대 반영) -->
         <div class="animate-content grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 justify-items-center items-end w-full mx-auto">
             
-            <!-- 신규 프로젝트 1 (AI) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
-                <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2 text-indigo-400/80">AI</span>
-                <div class="behance-card">
+                <span class="text-zinc-400 text-[9px] tracking-[0.4em] uppercase font-bold block w-full text-center md:text-left pl-2">AI</span>
+                <div class="behance-card hover-green">
                     <iframe src="https://www.behance.net/embed/project/249936805?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0" allow="clipboard-write"></iframe>
                 </div>
             </div>
 
-            <!-- 프로젝트 2 (3D + AI) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
-                <span class="text-zinc-600 text-[9px] tracking-[0.4em] uppercase font-normal block w-full text-center md:text-left pl-2">3D + AI</span>
-                <div class="behance-card">
+                <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2">3D + AI</span>
+                <div class="behance-card hover-purple">
                     <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
                 </div>
             </div>
 
-            <!-- 프로젝트 3 (3D + AI) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
-                <span class="text-zinc-600 text-[9px] tracking-[0.4em] uppercase font-normal block w-full text-center md:text-left pl-2">3D + AI</span>
-                <div class="behance-card">
+                <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2">3D + AI</span>
+                <div class="behance-card hover-purple">
                     <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
                 </div>
             </div>
 
         </div>
 
-        <!-- 푸터 섹션 -->
         <div class="animate-content mt-20">
-            <p class="text-zinc-700 text-[9px] tracking-[0.6em] uppercase font-light">
+            <p class="text-zinc-600 text-[9px] tracking-[0.6em] uppercase font-medium">
                 Thanks for watching
             </p>
         </div>
