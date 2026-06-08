@@ -28,6 +28,7 @@
             background-attachment: fixed;
             color: #ffffff; 
             overflow-x: hidden;
+            overflow-y: auto;
         }
 
         @keyframes rollIn {
@@ -58,7 +59,7 @@
             z-index: -1;
         }
 
-        /* 비핸스 카드 기본 스타일 */
+        /* 비핸스 & 비메오 카드 통합 스타일 - 고정 사이즈 크기 완벽 대칭 */
         .behance-card {
             background: rgba(255, 255, 255, 0.02); 
             backdrop-filter: blur(12px);
@@ -69,9 +70,11 @@
             line-height: 0;
             width: 100%;
             max-width: 360px;
+            height: 280px; 
+            position: relative;
         }
 
-        /* [기본 마우스 호버] 카드 2, 3번에 적용되는 은은한 보라색 광원 연출 */
+        /* [보라색 호버] 2행 3D+AI 카드들에 적용되는 네온 아우라 */
         .behance-card.hover-purple:hover {
             transform: translateY(-12px) scale(1.02);
             background: rgba(167, 139, 250, 0.08); 
@@ -79,7 +82,7 @@
             box-shadow: 0 25px 50px rgba(167, 139, 250, 0.15), 0 10px 30px rgba(0, 0, 0, 0.5); 
         }
 
-        /* [독자적 그린 호버 패치] 좌측 라임그린 성운 영역에 위치한 1번 카드 전용 그린 네온 발광 연출 */
+        /* [그린 호버] 1행 AI 카드들(비메오 포함)에 적용되는 네온 아우라 */
         .behance-card.hover-green:hover {
             transform: translateY(-12px) scale(1.02);
             background: rgba(152, 181, 66, 0.08); 
@@ -87,12 +90,23 @@
             box-shadow: 0 25px 50px rgba(152, 181, 66, 0.12), 0 10px 30px rgba(0, 0, 0, 0.5); 
         }
 
+        /* 비메오 맞춤형 업로드 이미지 가득 채우기 커스텀 수식 */
+        .custom-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
         /* ----------------------------------------------------------- */
         /* 모바일 화면 전용 정밀 최적화 영역 (SAinT0117 레이아웃 반영) */
         /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
             body { 
-                padding: 8rem 1.5rem 5rem 1.5rem !important;
+                padding: 0 !important; 
+            }
+            .mobile-container {
+                padding: 6rem 1.5rem 4rem 1.5rem !important;
             }
             
             .avatar-container img { 
@@ -101,7 +115,7 @@
             }
             
             h2 { font-size: 0.9rem !important; margin-bottom: 0 !important; }
-            h1 { font-size: 0.75rem !important; margin-bottom: 0.2rem !important; }
+            /* h1 태그의 모바일 정밀 최적화 제한을 전면 해제하여 이미지 2번 고유의 완성도 100% 보존 */
             p { font-size: 7px !important; }
             
             .animate-roll {
@@ -122,10 +136,12 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
+<!-- min-h-screen 및 패딩 매칭을 통해 이미지 2번과 똑같은 완벽한 수직 중앙 정렬 여백 유지 -->
+<body class="min-h-screen flex flex-col justify-center items-center py-24 md:py-32 px-6 md:px-12">
 
-    <div class="max-w-6xl w-full text-center">
+    <div class="max-w-4xl w-full text-center mobile-container">
         
+        <!-- 프로필 헤더 섹션 -->
         <div class="animate-roll mb-16 inline-flex flex-col items-center">
             
             <div class="avatar-container mb-8">
@@ -137,6 +153,7 @@
             
             <div class="flex flex-col items-center gap-2">
                 <h2 class="text-white text-lg tracking-[0.3em] font-semibold uppercase">Hi, I'm Yuzi</h2>
+                <!-- [완벽 매칭 복원 패치] 이미지 2번과 원본 코드에 명시된 자중(font-light), 색상(text-zinc-500), 최고급 자간(tracking-[0.25em]) 완벽 복구 완료 -->
                 <h1 class="text-zinc-500 text-sm tracking-[0.25em] font-light uppercase italic">3D Motion / AI Design</h1>
                 
                 <div class="w-8 h-[1px] bg-zinc-800 my-2"></div>
@@ -145,8 +162,18 @@
             </div>
         </div>
 
-        <div class="animate-content grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 justify-items-center items-end w-full mx-auto">
+        <!-- 포트폴리오 그리드 섹션 -->
+        <div class="animate-content grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 justify-items-center items-end w-full max-w-3xl mx-auto">
             
+            <!-- [1행 왼쪽 - TOP 1위 자리] 아디다스 AI 비메오 정확한 링크 결합 및 고화질 커스텀 이미지 매칭 -->
+            <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
+                <span class="text-zinc-400 text-[9px] tracking-[0.4em] uppercase font-bold block w-full text-center md:text-left pl-2">AI</span>
+                <a href="https://vimeo.com/1199532686?share=copy&fl=sv&fe=ci" target="_blank" class="behance-card hover-green block cursor-pointer">
+                    <img src="adidas-cover.png" alt="adidas - YOU GOT THIS | AI Spec Commercial" class="custom-cover-img">
+                </a>
+            </div>
+
+            <!-- [1행 오른쪽 - 2위 자리] 기존 첫 번째 AI 작품 -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-400 text-[9px] tracking-[0.4em] uppercase font-bold block w-full text-center md:text-left pl-2">AI</span>
                 <div class="behance-card hover-green">
@@ -154,6 +181,7 @@
                 </div>
             </div>
 
+            <!-- [2행 왼쪽] 프로젝트 3 (3D + AI) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2">3D + AI</span>
                 <div class="behance-card hover-purple">
@@ -161,6 +189,7 @@
                 </div>
             </div>
 
+            <!-- [2행 오른쪽] 프로젝트 4 (3D + AI) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2">3D + AI</span>
                 <div class="behance-card hover-purple">
@@ -170,7 +199,8 @@
 
         </div>
 
-        <div class="animate-content mt-20">
+        <!-- 푸터 섹션 -->
+        <div class="animate-content mt-24">
             <p class="text-zinc-600 text-[9px] tracking-[0.6em] uppercase font-medium">
                 Thanks for watching
             </p>
