@@ -17,7 +17,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #060608; 
-            /* 제공해주신 원본 코드의 컬러 농도와 투명도를 100% 그대로 유지하고 정적인 초저속 무브먼트만 바인딩 */
+            /* [PC 웹 전용 사수] 원본 코드의 컬러 농도와 투명도를 100% 그대로 유지하고 정적인 초저속 무브먼트만 바인딩 */
             background-image: 
                 url("https://www.transparenttextures.com/patterns/stardust.png"), 
                 radial-gradient(circle at 15% 15%, rgba(152, 181, 66, 0.45) 0%, transparent 45%), 
@@ -73,7 +73,7 @@
             position: relative;
         }
 
-        /* [보라색 호버] 카드 3, 4번에 적용되는 은은한 보라색 네온 아우라 연출 */
+        /* [보라색 호버] 카드 마우스 오버 시 퍼플 아우라 연출 */
         .behance-card.hover-purple:hover {
             transform: translateY(-12px) scale(1.02);
             background: rgba(167, 139, 250, 0.08); 
@@ -81,7 +81,7 @@
             box-shadow: 0 25px 50px rgba(167, 139, 250, 0.15), 0 10px 30px rgba(0, 0, 0, 0.5); 
         }
 
-        /* [그린 호버] 카드 1, 2번에 적용되는 은은한 라임 그린 네온 아우라 연출 */
+        /* [그린 호버] 카드 마우스 오버 시 라임 그린 아우라 연출 */
         .behance-card.hover-green:hover {
             transform: translateY(-12px) scale(1.02);
             background: rgba(152, 181, 66, 0.08); 
@@ -101,7 +101,7 @@
         /* 모바일 화면 전용 정밀 최적화 영역 (SAinT0117 레이아웃 반영) */
         /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
-            /* [모바일 전용 성운 상하 대반전 구조 고정] PC 웹판은 100% 유지한 채 모바일의 보라성운 상단 배치 사수 */
+            /* [모바일 전용 성운 상하 대반전 구조 사수] PC 웹판은 100% 유지한 채 모바일의 보라성운 상단 배치 보존 */
             body { 
                 padding: 0 !important; 
                 background-image: 
@@ -119,19 +119,14 @@
                 height: 80px !important;
             }
 
-            /* [모바일 아바타 글로우 미세 감도 패치] 
-               보라색 배경과 겹쳤을 때 너무 들뜨지 않도록 강도를 0.65에서 은은한 0.45로 정밀 톤다운 */
+            /* 모바일 환경에서만 독립적으로 은은하게 타오르는 아바타 백라이트 효과 */
             .avatar-glow {
                 background: radial-gradient(circle, rgba(167, 139, 250, 0.45) 0%, transparent 73%) !important;
                 filter: blur(20px) !important;
             }
             
             h2 { font-size: 0.9rem !important; margin-bottom: 0 !important; }
-            
-            /* [모바일 전용 폰트 사이즈 미세 조율] 
-               웹버전의 완벽한 폰트 무드를 지키면서, 모바일 화면 안에서만 서브타이틀의 자도를 정교하게 축소 (0.8rem) */
             h1 { font-size: 0.8rem !important; margin-bottom: 0.2rem !important; }
-            
             p { font-size: 7px !important; }
             
             .animate-roll {
@@ -149,6 +144,24 @@
                 gap: 3.5rem !important;
                 margin-top: 1rem;
             }
+
+            /* [모바일 전용 카드 인터랙션 스와프 수식] 
+               PC 웹버전의 스타일은 강제로 고정해두고, 가로폭이 좁은 모바일 웹 환경에서만 
+               1행 카드에 보라색 네온광(hover-purple)을, 2행 카드에 그린 네온광(hover-green)을 전면 투사 */
+            .mobile-hover-purple-override {
+                transform: translateY(-12px) scale(1.02) !important;
+                background: rgba(167, 139, 250, 0.08) !important; 
+                border-color: rgba(167, 139, 250, 0.5) !important; 
+                box-shadow: 0 25px 50px rgba(167, 139, 250, 0.15), 0 10px 30px rgba(0, 0, 0, 0.5) !important; 
+            }
+            .mobile-hover-green-override {
+                transform: translateY(-12px) scale(1.02) !important;
+                background: rgba(152, 181, 66, 0.08) !important; 
+                border-color: rgba(152, 181, 66, 0.45) !important; 
+                box-shadow: 0 25px 50px rgba(152, 181, 66, 0.12), 0 10px 30px rgba(0, 0, 0, 0.5) !important; 
+            }
+            .behance-card.hover-green:hover { @extend .mobile-hover-purple-override; }
+            .behance-card.hover-purple:hover { @extend .mobile-hover-green-override; }
         }
     </style>
 </head>
