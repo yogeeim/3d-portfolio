@@ -6,7 +6,6 @@
     <title>Welcome to my 3D & AI Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 引入 Inter 폰트의 Light(300) 자중을 명시적으로 포함 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;1,400&display=swap');
 
         /* 부드러운 우주 호흡 애니메이션 결합 */
@@ -50,7 +49,7 @@
             animation: float 5s ease-in-out infinite;
         }
 
-        /* 고정값: 보라색 글로우 강도 0.22 및 확산 범위 73% */
+        /* [PC 웹 전용 사수] 고정값: 보라색 글로우 강도 0.22 및 확산 범위 73% 절대 보존 */
         .avatar-glow {
             position: absolute;
             inset: -5px;
@@ -70,7 +69,7 @@
             line-height: 0;
             width: 100%;
             max-width: 360px;
-            height: 280px; 
+            height: 280px;
             position: relative;
         }
 
@@ -104,18 +103,30 @@
         @media (max-width: 640px) {
             body { 
                 padding: 0 !important; 
+                background-image: 
+                    url("https://www.transparenttextures.com/patterns/stardust.png"), 
+                    radial-gradient(circle at 10% 15%, rgba(152, 181, 66, 0.45) 0%, transparent 45%), 
+                    radial-gradient(circle at 90% 45%, rgba(66, 40, 92, 0.5) 0%, transparent 50%); 
+                background-size: auto, 100% 100%, 100% 100%; 
             }
             .mobile-container {
-                padding: 6rem 1.5rem 4rem 1.5rem !important;
+                padding: 8rem 1.5rem 5rem 1.5rem !important; 
             }
             
             .avatar-container img { 
                 width: 80px !important; 
                 height: 80px !important;
             }
+
+            /* [모바일 전용 아바타 글로우 강화 패치] 
+               그린 성운 배경에 보라색 글로우가 파묻히는 현상을 완벽히 차단하기 위해, 
+               모바일 환경에서만 독립적으로 투명도를 0.22에서 0.65로 대폭 강화하고 블러 반경 최적화 */
+            .avatar-glow {
+                background: radial-gradient(circle, rgba(167, 139, 250, 0.60) 0%, transparent 73%) !important;
+                filter: blur(20px) !important;
+            }
             
             h2 { font-size: 0.9rem !important; margin-bottom: 0 !important; }
-            /* h1 태그의 모바일 정밀 최적화 제한을 전면 해제하여 이미지 2번 고유의 완성도 100% 보존 */
             p { font-size: 7px !important; }
             
             .animate-roll {
@@ -136,7 +147,6 @@
         }
     </style>
 </head>
-<!-- min-h-screen 및 패딩 매칭을 통해 이미지 2번과 똑같은 완벽한 수직 중앙 정렬 여백 유지 -->
 <body class="min-h-screen flex flex-col justify-center items-center py-24 md:py-32 px-6 md:px-12">
 
     <div class="max-w-4xl w-full text-center mobile-container">
@@ -153,7 +163,6 @@
             
             <div class="flex flex-col items-center gap-2">
                 <h2 class="text-white text-lg tracking-[0.3em] font-semibold uppercase">Hi, I'm Yuzi</h2>
-                <!-- [완벽 매칭 복원 패치] 이미지 2번과 원본 코드에 명시된 자중(font-light), 색상(text-zinc-500), 최고급 자간(tracking-[0.25em]) 완벽 복구 완료 -->
                 <h1 class="text-zinc-500 text-sm tracking-[0.25em] font-light uppercase italic">3D Motion / AI Design</h1>
                 
                 <div class="w-8 h-[1px] bg-zinc-800 my-2"></div>
@@ -165,7 +174,7 @@
         <!-- 포트폴리오 그리드 섹션 -->
         <div class="animate-content grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 justify-items-center items-end w-full max-w-3xl mx-auto">
             
-            <!-- [1행 왼쪽 - TOP 1위 자리] 아디다스 AI 비메오 정확한 링크 결합 및 고화질 커스텀 이미지 매칭 -->
+            <!-- [1행 왼쪽 - TOP 1위 자리] 아디다스 AI 비메오 링크 연동 카드 -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-400 text-[9px] tracking-[0.4em] uppercase font-bold block w-full text-center md:text-left pl-2">AI</span>
                 <a href="https://vimeo.com/1199532686?share=copy&fl=sv&fe=ci" target="_blank" class="behance-card hover-green block cursor-pointer">
@@ -200,7 +209,7 @@
         </div>
 
         <!-- 푸터 섹션 -->
-        <div class="animate-content mt-24">
+        <div class="animate-content mt-20">
             <p class="text-zinc-600 text-[9px] tracking-[0.6em] uppercase font-medium">
                 Thanks for watching
             </p>
