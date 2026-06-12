@@ -17,7 +17,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #060608; 
-            /* 제공해주신 원본 코드의 컬러 농도와 투명도를 100% 그대로 유지하고 정적인 초저속 무브먼트만 바인딩 */
+            /* [PC 웹 전용 사수] 원본 코드의 컬러 농도와 투명도를 100% 그대로 유지하고 정적인 초저속 무브먼트만 바인딩 */
             background-image: 
                 url("https://www.transparenttextures.com/patterns/stardust.png"), 
                 radial-gradient(circle at 15% 15%, rgba(152, 181, 66, 0.45) 0%, transparent 45%), 
@@ -73,7 +73,7 @@
             position: relative;
         }
 
-        /* [보라색 호버] 2행 3D+AI 카드들에 적용되는 네온 아우라 */
+        /* [보라색 호버] 기본 마우스 아우라 연출 */
         .behance-card.hover-purple:hover {
             transform: translateY(-12px) scale(1.02);
             background: rgba(167, 139, 250, 0.08); 
@@ -81,7 +81,7 @@
             box-shadow: 0 25px 50px rgba(167, 139, 250, 0.15), 0 10px 30px rgba(0, 0, 0, 0.5); 
         }
 
-        /* [그린 호버] 1행 AI 카드들(비메오 포함)에 적용되는 네온 아우라 */
+        /* [그린 호버] 기본 마우스 아우라 연출 */
         .behance-card.hover-green:hover {
             transform: translateY(-12px) scale(1.02);
             background: rgba(152, 181, 66, 0.08); 
@@ -101,12 +101,15 @@
         /* 모바일 화면 전용 정밀 최적화 영역 (SAinT0117 레이아웃 반영) */
         /* ----------------------------------------------------------- */
         @media (max-width: 640px) {
+            /* [모바일 전용 성운 상하 대반전 패치] 
+               PC 웹판은 100% 그대로 지킨 채, 모바일 환경에서만 독립적으로 보라색 성운을 좌상단(아바타 배경)으로 올리고 
+               라임 그린 성운을 우측 하단(스크롤 영역)으로 배치하여 첫 화면의 아티스틱한 아바타 매칭 완성 */
             body { 
                 padding: 0 !important; 
                 background-image: 
                     url("https://www.transparenttextures.com/patterns/stardust.png"), 
-                    radial-gradient(circle at 10% 15%, rgba(152, 181, 66, 0.45) 0%, transparent 45%), 
-                    radial-gradient(circle at 90% 45%, rgba(66, 40, 92, 0.5) 0%, transparent 50%); 
+                    radial-gradient(circle at 15% 15%, rgba(66, 40, 92, 0.5) 0%, transparent 50%), /* 보라색 성운 상단 전면 배치 */
+                    radial-gradient(circle at 85% 85%, rgba(152, 181, 66, 0.45) 0%, transparent 45%); /* 라임 그린 성운 하단 전면 배치 */
                 background-size: auto, 100% 100%, 100% 100%; 
             }
             .mobile-container {
@@ -118,11 +121,9 @@
                 height: 80px !important;
             }
 
-            /* [모바일 전용 아바타 글로우 강화 패치] 
-               그린 성운 배경에 보라색 글로우가 파묻히는 현상을 완벽히 차단하기 위해, 
-               모바일 환경에서만 독립적으로 투명도를 0.22에서 0.65로 대폭 강화하고 블러 반경 최적화 */
+            /* 모바일 환경에서만 독립적으로 투명도를 최적화하여 상단 보라색 성운과 함께 깊이감 극대화 */
             .avatar-glow {
-                background: radial-gradient(circle, rgba(167, 139, 250, 0.60) 0%, transparent 73%) !important;
+                background: radial-gradient(circle, rgba(167, 139, 250, 0.65) 0%, transparent 73%) !important;
                 filter: blur(20px) !important;
             }
             
@@ -174,34 +175,34 @@
         <!-- 포트폴리오 그리드 섹션 -->
         <div class="animate-content grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 justify-items-center items-end w-full max-w-3xl mx-auto">
             
-            <!-- [1행 왼쪽 - TOP 1위 자리] 아디다스 AI 비메오 링크 연동 카드 -->
+            <!-- [1행 왼쪽 - TOP 1위 자리] 아디다스 AI 비메오 링크 연동 카드 (모바일에서는 상단 보라성운에 맞춰 hover-purple로 인터랙션 변경) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-400 text-[9px] tracking-[0.4em] uppercase font-bold block w-full text-center md:text-left pl-2">AI</span>
-                <a href="https://vimeo.com/1199532686?share=copy&fl=sv&fe=ci" target="_blank" class="behance-card hover-green block cursor-pointer">
+                <a href="https://vimeo.com/1199532686?share=copy&fl=sv&fe=ci" target="_blank" class="behance-card hover-purple md:hover-green block cursor-pointer">
                     <img src="adidas-cover.png" alt="adidas - YOU GOT THIS | AI Spec Commercial" class="custom-cover-img">
                 </a>
             </div>
 
-            <!-- [1행 오른쪽 - 2위 자리] 기존 첫 번째 AI 작품 -->
+            <!-- [1행 오른쪽 - 2위 자리] 기존 첫 번째 AI 작품 (모바일에서는 상단 보라성운에 맞춰 hover-purple로 인터랙션 변경) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-400 text-[9px] tracking-[0.4em] uppercase font-bold block w-full text-center md:text-left pl-2">AI</span>
-                <div class="behance-card hover-green">
+                <div class="behance-card hover-purple md:hover-green">
                     <iframe src="https://www.behance.net/embed/project/249936805?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0" allow="clipboard-write"></iframe>
                 </div>
             </div>
 
-            <!-- [2행 왼쪽] 프로젝트 3 (3D + AI) -->
+            <!-- [2행 왼쪽] 프로젝트 3 (3D + AI) (모바일에서는 하단 그린성운에 맞춰 hover-green으로 인터랙션 변경) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2">3D + AI</span>
-                <div class="behance-card hover-purple">
+                <div class="behance-card hover-green md:hover-purple">
                     <iframe src="https://www.behance.net/embed/project/247108587?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
                 </div>
             </div>
 
-            <!-- [2행 오른쪽] 프로젝트 4 (3D + AI) -->
+            <!-- [2행 오른쪽] 프로젝트 4 (3D + AI) (모바일에서는 하단 그린성운에 맞춰 hover-green으로 인터랙션 변경) -->
             <div class="flex flex-col items-center gap-2 w-full max-w-[360px] sm:max-w-none">
                 <span class="text-zinc-500 text-[9px] tracking-[0.4em] uppercase font-semibold block w-full text-center md:text-left pl-2">3D + AI</span>
-                <div class="behance-card hover-purple">
+                <div class="behance-card hover-green md:hover-purple">
                     <iframe src="https://www.behance.net/embed/project/247583881?ilo0=1" height="280" width="100%" allowfullscreen lazyload frameborder="0"></iframe>
                 </div>
             </div>
